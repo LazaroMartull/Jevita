@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jevita 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff0f6;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      animation: pulse 1s infinite;
+      transition: transform 0.3s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .message {
+      position: absolute;
+      width: 100%;
+      top: calc(50% + 60px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+      color: #d63384;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .page2 {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      color: #d63384;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+
+    .page2 h1 {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards, heartbeat 1.2s infinite ease-in-out;
+      animation-delay: 0.3s;
+      transform-origin: center;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.3); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.3); }
+      70% { transform: scale(1); }
+    }
+
+    .page2 p:nth-of-type(1) {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .page2 p:nth-of-type(2) {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.9s;
+    }
+
+    .gallery img {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="page1">
+    <div class="heart" id="heart"></div>
+    <div class="message" id="message">Toca el Corazon bb 💗</div>
+  </div>
+
+  <div class="page2" id="page2">
+    <h1>Para la Jevita mas bella del mundo 💕</h1>
+    <p>Muchas gracias por ser la mejor novia del mundo no hay palabras pa describir como me siento contigo.</p>
+    <p>Eres mi verano rosa y mi Jevita por siempreee ☀️</p>
+    <div class="gallery">
+      <img src="your-image1.jpg" alt="Us">
+      <img src="your-image2.jpg" alt="You">
+      <img src="your-image3.jpg" alt="Moments">
+    </div>
+  </div>
+
+  <script>
+    const heart = document.getElementById("heart");
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    const message = document.getElementById("message");
+    let clicks = 0;
+
+    const messages = [
+      "Toca el Corazon bb 💗",
+      "Otra vez 😘",
+      "Te amo 💕",
+      "Mi reinaaa 😍",
+      "Mami te quierooo 💓",
+      "Quieres una Sorpresa 🎁"
+    ];
+
+    function randomPosition() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+
+      message.style.top = `${y + 110}px`;
+      message.style.left = `${x + 50}px`;
+      message.style.transform = "translateX(-50%)";
+    }
+
+    heart.addEventListener("click", () => {
+      clicks++;
+      heart.style.transform = `scale(${1 + clicks * 0.1})`;
+      message.textContent = messages[Math.min(clicks, messages.length - 1)];
+      randomPosition();
+      if (clicks >= 5) {
+        page1.style.display = "none";
+        page2.style.display = "block";
+      }
+    });
+
+    randomPosition();
+  </script>
+</body>
+</html>
